@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Cas et témoignages d\'objets célestes non identifiés';
+  subtitle = 'Par Hava CHAPTOUKAEV & Anais KHORN';
 }
