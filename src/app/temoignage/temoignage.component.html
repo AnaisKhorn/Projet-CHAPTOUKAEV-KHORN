@@ -1,10 +1,11 @@
-<div *ngFor="let obj of tabCas">
+<div *ngFor="let obj of tabTem">
   <mat-card class="cardContainer">
     <mat-card-header>
       <i mat-card-avatar class="material-icons">
         dns
       </i>
-      <mat-card-title>Cas {{obj.id_cas}}</mat-card-title>
+      <mat-card-title>Témoignage {{obj.id_temoignage}}</mat-card-title>
+      <mat-card-subtitle>{{obj.tem_nom_dossier}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <mat-divider></mat-divider>
@@ -22,4 +23,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-

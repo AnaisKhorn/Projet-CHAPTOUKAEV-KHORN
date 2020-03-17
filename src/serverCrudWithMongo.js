@@ -5,25 +5,23 @@ const server   = require('http').Server(app);
 
 const mongoDBModule = require('./crud-mongo');
 
+// Pour les formulaires standards
+const bodyParser = require('body-parser');
+// pour les formulaires multiparts
+
+
 // Cette ligne indique le répertoire qui contient
 // les fichiers statiques: html, css, js, images etc.
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + '/public'));
 // Paramètres standards du modyle bodyParser
 // qui sert à récupérer des paramètres reçus
 // par ex, par l'envoi d'un formulaire "standard"
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.header("Access-Control-Allow-Methods", "POST");
-
-  next();
-});
-
 // Lance le serveur avec express
 server.listen(port);
+
 console.log("Serveur lancé sur le port : " + port);
 
 //------------------
@@ -32,17 +30,24 @@ console.log("Serveur lancé sur le port : " + port);
 // Utile pour indiquer la home page, dans le cas
 // ou il ne s'agit pas de public/index.html
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + 'index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Ici des routes en :
 // http GET (pour récupérer des données)
+// http POST : pour insérer des données
+// http PUT pour modifier des données
+// http DELETE pour supprimer des données
 
 //----------------------------------------------
 // Ces routes forment l'API de l'application !!
 //----------------------------------------------
 
+// Test de la connexion à la base
 app.get('/api/connection', function(req, res) {
+  // Pour le moment on simule, mais après on devra
+  // réellement se connecte à la base de données
+  // et renvoyer une valeur pour dire si tout est ok
   mongoDBModule.connexionMongo(function(err, db) {
     let reponse;
 
@@ -53,11 +58,13 @@ app.get('/api/connection', function(req, res) {
       }
     } else {
       reponse = {
-        msg: "connexion établie" + db
+        msg: "connexion établie"
       }
     }
     res.send(JSON.stringify(reponse));
+
   });
+});
 
 // On va récupérer des cas par un GET (standard REST)
 // cette fonction d'API peut accepter des paramètres
@@ -65,52 +72,59 @@ app.get('/api/connection', function(req, res) {
 // page = no de la page
 // Oui, on va faire de la pagination, pour afficher
 // par exemple les cas 10 par 10
-  app.get('/api/cas', function(req, res) {
-    // Si présent on prend la valeur du param, sinon 1
-    let page = parseInt(req.query.page || 1);
-    // idem si present on prend la valeur, sinon 10
-    let pagesize = parseInt(req.query.pagesize || 10);
+app.get('/api/cas', function(req, res) {
+  // Si présent on prend la valeur du param, sinon 1
+  let page = parseInt(req.query.page || 1);
+  // idem si present on prend la valeur, sinon 10
+  let pagesize = parseInt(req.query.pagesize || 10);
 
-    mongoDBModule.findCases(page, pagesize, function(data) {
-      var objdData = {
-        msg:"cas recherché avec succès",
-        data: data
-      }
-      res.send(JSON.stringify(objdData));
-    });
-  });
-
-// Récupération d'un seul cas par son id
-  app.get('/api/cas/:id', function(req, res) {
-    var id = req.params.id;
-
-    mongoDBModule.findCasesById(id, function(data) {
-      res.send(JSON.stringify(data));
-    });
-
-  });
-
-  app.get('/api/temoignage', function(req, res) {
-    // Si présent on prend la valeur du param, sinon 1
-    let page = parseInt(req.query.page || 1);
-    // idem si present on prend la valeur, sinon 10
-    let pagesize = parseInt(req.query.pagesize || 10);
-
-    mongoDBModule.findTestimonies(page, pagesize, function(data) {
-      var objdData = {
-        msg:"témoignage recherché avec succès",
-        data: data
-      }
-      res.send(JSON.stringify(objdData));
-    });
-  });
-
-  // Récupération d'un seul témoignage par son id
-  app.get('/api/temoignage/:id', function(req, res) {
-    var id = req.params.id;
-
-    mongoDBModule.findTestimoniesById(id, function(data) {
-      res.send(JSON.stringify(data));
-    });
+  mongoDBModule.findCases(page, pagesize, function(data) {
+    var objdData = {
+      msg:"Cas recherchés avec succès",
+      data: data
+    }
+    res.send(JSON.stringify(objdData));
   });
 });
+
+// Récupération d'un seul cas par son id
+app.get('/api/cas/:id', function(req, res) {
+  var id = req.params.id;
+
+  mongoDBModule.findCaseById(id, function(data) {
+    res.send(JSON.stringify(data));
+  });
+
+})
+
+// On va récupérer des témoignages par un GET (standard REST)
+// cette fonction d'API peut accepter des paramètres
+// pagesize = nombre de témoignages par page
+// page = no de la page
+// Oui, on va faire de la pagination, pour afficher
+// par exemple les témoignages 10 par 10
+app.get('/api/temoignages', function(req, res) {
+  // Si présent on prend la valeur du param, sinon 1
+  let page = parseInt(req.query.page || 1);
+  // idem si present on prend la valeur, sinon 10
+  let pagesize = parseInt(req.query.pagesize || 10);
+
+  mongoDBModule.findTestimonies(page, pagesize, function(data) {
+    var objdData = {
+      msg:"Témoignage recherchés avec succès",
+      data: data
+    }
+    res.send(JSON.stringify(objdData));
+  });
+});
+
+// Récupération d'un seul témoignage par son id
+app.get('/api/temoignages/:id', function(req, res) {
+  var id = req.params.id;
+
+  mongoDBModule.findTestimonyById(id, function(data) {
+    res.send(JSON.stringify(data));
+  });
+
+})
+

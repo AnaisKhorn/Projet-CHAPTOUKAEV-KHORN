@@ -2,6 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
 var assert = require('assert');
+//var url = 'mongodb://localhost:27017/db';
 
 // Connection URL
 const url = 'mongodb://localhost:27017';
@@ -11,7 +12,6 @@ const dbName = 'db';
 
 exports.connexionMongo = function(callback) {
   MongoClient.connect(url, function(err, client) {
-    console.log(client);
     var db = client.db(dbName);
 
     assert.equal(null, err);
@@ -19,14 +19,14 @@ exports.connexionMongo = function(callback) {
   });
 }
 
-exports.findCases = function(page, pagesize, callback){
-  MongoClient.connect(url, function (err, client) {
+exports.findCases = function(page, pagesize, callback) {
+  MongoClient.connect(url, function(err, client) {
     console.log("pagesize = " + pagesize);
     console.log("page = " + pagesize);
 
     var db = client.db(dbName);
 
-    console.log("db " + db);
+    console.log("db " + db)
     if(!err){
       db.collection('cas')
         .find()
@@ -34,36 +34,39 @@ exports.findCases = function(page, pagesize, callback){
         .limit(pagesize)
         .toArray()
         .then(arr => callback(arr));
-    } else {
+    }
+    else{
       callback(-1);
     }
   });
 };
 
-exports.findCasesById = function(id, callback) {
-  MongoClient.connect(url, function(err, client) {
+exports.findCaseById = function(id, callback) {
+  MongoClient.connect(url, function (err, client) {
     var db = client.db(dbName);
-    if(!err){
+    if (!err) {
+      // La requete mongoDB
 
       let myquery = {"_id": ObjectId(id)};
 
-      db.collection('cas')
-        .findOne(myquery, function(err, data){
+      db.collection("cas")
+        .findOne(myquery, function (err, data) {
           let reponse;
 
-          if(!err){
+          if (!err) {
             reponse = {
-              succes: false,
-              cas: data,
-              error: err,
-              msg: "Détails du cas envoyé"
+              succes: true,
+              restaurant: data,
+              error: null,
+              msg: "Details du cas envoyé"
             };
           } else {
             reponse = {
               succes: false,
-              cas: null,
+              restaurant: null,
               error: err,
-              msg: "Erreur lors du find"
+              msg: "erreur lors du find"
+
             };
           }
           callback(reponse);
@@ -71,72 +74,76 @@ exports.findCasesById = function(id, callback) {
     } else {
       let reponse = reponse = {
         succes: false,
-        cas: null,
+        restaurant: null,
         error: err,
-        msg: "Erreur de connexion à la base"
+        msg: "erreur de connexion à la base"
       };
-    }
       callback(reponse);
-  });
-};
-
-exports.findTestimonies = function(page, pagesize, callback){
-  MongoClient.connect(url, function (err, client) {
-    console.log("pagesize = " + pagesize);
-    console.log("page = " + pagesize);
-
-    var db = client.db(dbName);
-
-    console.log("db " + db);
-    if(!err){
-      db.collection('temoignage')
-        .find()
-        .skip(page*pagesize)
-        .limit(pagesize)
-        .toArray()
-        .then(arr => callback(arr));
-    } else {
-      callback(-1);
     }
   });
-};
 
-exports.findTestimoniesById = function(id, callback) {
-  MongoClient.connect(url, function(err, client) {
-    var db = client.db(dbName);
-    if(!err){
 
-      let myquery = {"_id": ObjectId(id)};
+  exports.findTestimonies = function (page, pagesize, callback) {
+    MongoClient.connect(url, function (err, client) {
+      console.log("pagesize = " + pagesize);
+      console.log("page = " + pagesize);
 
-      db.collection('temoignage')
-        .findOne(myquery, function(err, data){
-          let reponse;
+      var db = client.db(dbName);
 
-          if(!err){
-            reponse = {
-              succes: false,
-              cas: data,
-              error: err,
-              msg: "Détails du témoignage envoyé"
-            };
-          } else {
-            reponse = {
-              succes: false,
-              cas: null,
-              error: err,
-              msg: "Erreur lors du find"
-            };
-          }
-          callback(reponse);
-        });
-    } else {
-      let reponse = reponse = {
-        succes: false,
-        cas: null,
-        error: err,
-        msg: "Erreur de connexion à la base"
-      };
-    }
-    callback(reponse);
-  });
-};
+      console.log("db " + db)
+      if (!err) {
+        db.collection('temoignage')
+          .find()
+          .skip(page * pagesize)
+          .limit(pagesize)
+          .toArray()
+          .then(arr => callback(arr));
+      } else {
+        callback(-1);
+      }
+    });
+  };
+
+  exports.findTestimonyById = function (id, callback) {
+    MongoClient.connect(url, function (err, client) {
+      var db = client.db(dbName);
+      if (!err) {
+        // La requete mongoDB
+
+        let myquery = {"_id": ObjectId(id)};
+
+        db.collection("temoignage")
+          .findOne(myquery, function (err, data) {
+            let reponse;
+
+            if (!err) {
+              reponse = {
+                succes: true,
+                restaurant: data,
+                error: null,
+                msg: "Details du témoignage envoyé"
+              };
+            } else {
+              reponse = {
+                succes: false,
+                restaurant: null,
+                error: err,
+                msg: "erreur lors du find"
+
+              };
+            }
+            callback(reponse);
+          });
+      } else {
+        let reponse = reponse = {
+          succes: false,
+          restaurant: null,
+          error: err,
+          msg: "erreur de connexion à la base"
+        };
+        callback(reponse);
+      }
+    });
+  }
+}
+

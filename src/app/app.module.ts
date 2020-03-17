@@ -5,18 +5,43 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { CasComponent } from './cas/cas.component';
-import { TemoignagesComponent } from './temoignages/temoignages.component';
+import { TemoignageComponent } from './temoignage/temoignage.component';
+import { TableComponent } from './table/table.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NavbarComponent } from './navbar/navbar.component';
+import {RouterModule, Routes} from '@angular/router';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
+import {HttpClientModule} from '@angular/common/http';
+
+const appRoutes: Routes = [
+  {path: 'cas', component: TableComponent},
+  {path: 'cas/:id', component: CasComponent},
+  {path: 'temoignages', component: TemoignageComponent},
+  {path: '', component: TableComponent}
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     CasComponent,
-    TemoignagesComponent
+    TemoignageComponent,
+    TableComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    RouterModule.forRoot(appRoutes),
+    MDBBootstrapModule.forRoot(),
+    MatCardModule,
+    HttpClientModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
