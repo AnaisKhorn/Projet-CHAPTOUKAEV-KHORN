@@ -15,9 +15,11 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import {HttpClientModule} from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 const appRoutes: Routes = [
-  {path: 'cas', component: TableComponent},
+  {path: 'cas', component: CasComponent},
   {path: 'cas/:id', component: CasComponent},
   {path: 'temoignages', component: TemoignageComponent},
   {path: '', component: TableComponent}
@@ -40,6 +42,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MDBBootstrapModule.forRoot(),
     MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
     HttpClientModule,
     MatDividerModule
   ],

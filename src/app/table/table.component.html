@@ -4,3 +4,50 @@
     <label for="search1">Search</label>
   </div>
 </form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let el">{{el.id_cas}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef> Nom </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_nom_dossier}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="type de cas">
+    <th mat-header-cell *matHeaderCellDef> Type de cas </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_zone_type}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="région">
+    <th mat-header-cell *matHeaderCellDef> Région </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_zone_nom}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="résumé du cas">
+    <th mat-header-cell *matHeaderCellDef> Type de cas </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_resume_web}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="année du cas">
+    <th mat-header-cell *matHeaderCellDef> Année du cas </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_AAAA}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nb de témoignages">
+    <th mat-header-cell *matHeaderCellDef> Nb de témoignages </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_temoignages_nb}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="date de la dernière maj">
+    <th mat-header-cell *matHeaderCellDef> Date de la dernière maj </th>
+    <td mat-cell *matCellDef="let el">{{el.cas_date_maj}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let el; columns: displayedColumns;"></tr>
+
+</table>

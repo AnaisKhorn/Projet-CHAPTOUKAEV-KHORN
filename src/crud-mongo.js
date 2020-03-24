@@ -119,14 +119,14 @@ exports.findCaseById = function(id, callback) {
             if (!err) {
               reponse = {
                 succes: true,
-                restaurant: data,
+                temoignage: data,
                 error: null,
                 msg: "Details du témoignage envoyé"
               };
             } else {
               reponse = {
                 succes: false,
-                restaurant: null,
+                temoignage: null,
                 error: err,
                 msg: "erreur lors du find"
 
@@ -137,7 +137,7 @@ exports.findCaseById = function(id, callback) {
       } else {
         let reponse = reponse = {
           succes: false,
-          restaurant: null,
+          temoignage: null,
           error: err,
           msg: "erreur de connexion à la base"
         };
@@ -146,4 +146,3 @@ exports.findCaseById = function(id, callback) {
     });
   }
 }
-

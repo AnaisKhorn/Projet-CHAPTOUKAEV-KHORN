@@ -68,5 +68,4 @@ class Cas {
     this.cas_classification_calc = cas_classification_calc;
     this.cas_numEtude = cas_numEtude;
   }
-
 }

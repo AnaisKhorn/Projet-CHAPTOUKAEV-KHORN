@@ -19,6 +19,14 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use(function (req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
+
 // Lance le serveur avec express
 server.listen(port);
 
@@ -94,8 +102,7 @@ app.get('/api/cas/:id', function(req, res) {
   mongoDBModule.findCaseById(id, function(data) {
     res.send(JSON.stringify(data));
   });
-
-})
+});
 
 // On va récupérer des témoignages par un GET (standard REST)
 // cette fonction d'API peut accepter des paramètres
@@ -126,5 +133,4 @@ app.get('/api/temoignages/:id', function(req, res) {
     res.send(JSON.stringify(data));
   });
 
-})
-
+});
