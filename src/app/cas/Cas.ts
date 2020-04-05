@@ -1,4 +1,4 @@
-class Cas {
+export class Cas {
   _id: string;
   id_cas: string;
   cas_nom_dossier: string;

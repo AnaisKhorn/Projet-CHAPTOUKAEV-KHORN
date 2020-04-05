@@ -2,6 +2,8 @@ import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, O
 import {MatPaginator} from '@angular/material/paginator';
 import {HttpClient} from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
+import {Router} from '@angular/router';
+import {Cas} from '../cas/Cas';
 
 
 @Component({
@@ -17,11 +19,10 @@ export class TableComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
   displayedColumns = ['id', 'nom', 'type de cas', 'résumé du cas', 'région', 'année du cas', 'nb de témoignages', 'date de la dernière maj'];
-  dataSource = new MatTableDataSource<CasLight>();
 
   searchText = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
 
   ngOnInit() {
@@ -29,6 +30,15 @@ export class TableComponent implements OnInit {
   }
 
   public getAllCases = () => {
-    this.http.get('localhost:8080/api/cas').subscribe((data: any) => this.cas = data.cas);
+   // this.http.get('http://localhost:8080/api/cas').subscribe((data: any) => this.cas = data.cas);
+    this.http.get('http://localhost:8080/api/cas').subscribe((res: any) => this.cas = res.data);
+  }
+
+  public toCase(id: string) {
+    this.router.navigate(['/cas/' + id]);
+  }
+
+  public toTesti(id: string) {
+    this.router.navigate(['/temoignages/' + id]);
   }
 }

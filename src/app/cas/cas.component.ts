@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Cas} from './Cas';
 
 @Component({
   selector: 'app-cas',
@@ -7,6 +8,8 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./cas.component.css']
 })
 export class CasComponent implements OnInit {
+
+  static GET_CASES = 'http://localhost:8080/api/cas/';
 
   tabObj: Array<any>;
   tabCas: Cas[];
@@ -18,10 +21,10 @@ export class CasComponent implements OnInit {
     this.tabObj = [];
     this.tabCas = [];
 
-    this.http.get('localhost:8080/api/cas').subscribe((data: any) => {
+    this.http.get(CasComponent.GET_CASES).subscribe((data: any) => {
       // tslint:disable-next-line:one-line
-      for (let i = 0; i < data.length; i++){
-        this.tabObj.push(data[i]);
+      for (let i = 0; i < data.data.length; i++){
+        this.tabObj.push(data.data[i]);
       }
       console.log(this.tabObj);
       this.populateTabCas();

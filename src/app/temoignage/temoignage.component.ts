@@ -18,7 +18,7 @@ export class TemoignageComponent implements OnInit {
     this.tabObj = [];
     this.tabTem = [];
 
-    this.http.get('localhost:8080/api/temoignages').subscribe((data: any) => {
+    this.http.get('http://localhost:8080/api/temoignages').subscribe((data: any) => {
       // tslint:disable-next-line:one-line
       for (let i = 0; i < data.length; i++){
         this.tabObj.push(data[i]);
