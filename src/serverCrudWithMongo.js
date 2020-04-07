@@ -43,9 +43,6 @@ app.get('/', function(req, res) {
 
 // Ici des routes en :
 // http GET (pour récupérer des données)
-// http POST : pour insérer des données
-// http PUT pour modifier des données
-// http DELETE pour supprimer des données
 
 //----------------------------------------------
 // Ces routes forment l'API de l'application !!
@@ -80,15 +77,15 @@ app.get('/api/connection', function(req, res) {
 // page = no de la page
 // Oui, on va faire de la pagination, pour afficher
 // par exemple les cas 10 par 10
-app.get('/api/cas', function(req, res) {
+app.get('/api/data', function(req, res) {
   // Si présent on prend la valeur du param, sinon 1
   let page = parseInt(req.query.page || 1);
   // idem si present on prend la valeur, sinon 10
   let pagesize = parseInt(req.query.pagesize || 10);
 
-  mongoDBModule.findCases(page, pagesize, function(data) {
+  mongoDBModule.getData(page, pagesize, function(data) {
     var objdData = {
-      msg:"Cas recherchés avec succès",
+      msg:"Données recherchés avec succès",
       data: data
     }
     res.send(JSON.stringify(objdData));
@@ -96,41 +93,19 @@ app.get('/api/cas', function(req, res) {
 });
 
 // Récupération d'un seul cas par son id
-app.get('/api/cas/:id', function(req, res) {
-  var id = req.params.id;
+  app.get('/api/data/cas/:id', function(req, res) {
+    var id = req.params.id;
 
-  mongoDBModule.findCaseById(id, function(data) {
-    res.send(JSON.stringify(data));
-  });
+    mongoDBModule.findCaseById(id, function(data) {
+      res.send(JSON.stringify(data));
+    });
 });
 
-// On va récupérer des témoignages par un GET (standard REST)
-// cette fonction d'API peut accepter des paramètres
-// pagesize = nombre de témoignages par page
-// page = no de la page
-// Oui, on va faire de la pagination, pour afficher
-// par exemple les témoignages 10 par 10
-app.get('/api/temoignages', function(req, res) {
-  // Si présent on prend la valeur du param, sinon 1
-  let page = parseInt(req.query.page || 1);
-  // idem si present on prend la valeur, sinon 10
-  let pagesize = parseInt(req.query.pagesize || 10);
-
-  mongoDBModule.findTestimonies(page, pagesize, function(data) {
-    var objdData = {
-      msg:"Témoignage recherchés avec succès",
-      data: data
-    }
-    res.send(JSON.stringify(objdData));
-  });
-});
-
-// Récupération d'un seul témoignage par son id
-app.get('/api/temoignages/:id', function(req, res) {
+// Récupération d'un seul temoignage par son id
+app.get('/api/data/tem/:id', function(req, res) {
   var id = req.params.id;
 
-  mongoDBModule.findTestimonyById(id, function(data) {
+  mongoDBModule.findTemById(id, function(data) {
     res.send(JSON.stringify(data));
   });
-
 });

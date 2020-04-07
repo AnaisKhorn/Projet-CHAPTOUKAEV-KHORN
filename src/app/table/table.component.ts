@@ -26,12 +26,23 @@ export class TableComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getAllCases();
+    this.getCases();
   }
 
-  public getAllCases = () => {
-   // this.http.get('http://localhost:8080/api/cas').subscribe((data: any) => this.cas = data.cas);
-    this.http.get('http://localhost:8080/api/cas').subscribe((res: any) => this.cas = res.data);
+  public getCases = () => {
+    this.http.get('http://localhost:8080/api/data').subscribe((res: any) => this.cas = res.data);
+  }
+
+  public getCasesByDate() {
+
+  }
+
+  public getCasesByType() {
+
+  }
+
+  public getCasesByKeywords() {
+
   }
 
   public toCase(id: string) {

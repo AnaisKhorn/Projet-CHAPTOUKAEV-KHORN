@@ -9,7 +9,7 @@ import {Cas} from './Cas';
 })
 export class CasComponent implements OnInit {
 
-  static GET_CASES = 'http://localhost:8080/api/cas/';
+  static GET_CASES = 'http://localhost:8080/api/data/';
 
   tabObj: Array<any>;
   tabCas: Cas[];

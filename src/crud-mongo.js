@@ -8,7 +8,7 @@ var assert = require('assert');
 const url = 'mongodb://localhost:27017';
 
 // Database Name
-const dbName = 'db';
+const dbName = 'database';
 
 exports.connexionMongo = function(callback) {
   MongoClient.connect(url, function(err, client) {
@@ -19,7 +19,7 @@ exports.connexionMongo = function(callback) {
   });
 }
 
-exports.findCases = function(page, pagesize, callback) {
+exports.getData = function(page, pagesize, callback) {
   MongoClient.connect(url, function(err, client) {
     console.log("pagesize = " + pagesize);
     console.log("page = " + pagesize);
@@ -28,7 +28,7 @@ exports.findCases = function(page, pagesize, callback) {
 
     console.log("db " + db)
     if(!err){
-      db.collection('cas')
+      db.collection('data')
         .find()
         .skip(page*pagesize)
         .limit(pagesize)
@@ -49,21 +49,21 @@ exports.findCaseById = function(id, callback) {
 
       let myquery = {"_id": ObjectId(id)};
 
-      db.collection("cas")
+      db.collection("datas")
         .findOne(myquery, function (err, data) {
           let reponse;
 
           if (!err) {
             reponse = {
               succes: true,
-              restaurant: data,
+              cas: data,
               error: null,
               msg: "Details du cas envoyé"
             };
           } else {
             reponse = {
               succes: false,
-              restaurant: null,
+              cas: null,
               error: err,
               msg: "erreur lors du find"
 
@@ -74,7 +74,7 @@ exports.findCaseById = function(id, callback) {
     } else {
       let reponse = reponse = {
         succes: false,
-        restaurant: null,
+        cas: null,
         error: err,
         msg: "erreur de connexion à la base"
       };
@@ -82,29 +82,7 @@ exports.findCaseById = function(id, callback) {
     }
   });
 
-
-  exports.findTestimonies = function (page, pagesize, callback) {
-    MongoClient.connect(url, function (err, client) {
-      console.log("pagesize = " + pagesize);
-      console.log("page = " + pagesize);
-
-      var db = client.db(dbName);
-
-      console.log("db " + db)
-      if (!err) {
-        db.collection('temoignage')
-          .find()
-          .skip(page * pagesize)
-          .limit(pagesize)
-          .toArray()
-          .then(arr => callback(arr));
-      } else {
-        callback(-1);
-      }
-    });
-  };
-
-  exports.findTestimonyById = function (id, callback) {
+  exports.findTemById = function (id, callback) {
     MongoClient.connect(url, function (err, client) {
       var db = client.db(dbName);
       if (!err) {
@@ -112,7 +90,7 @@ exports.findCaseById = function(id, callback) {
 
         let myquery = {"_id": ObjectId(id)};
 
-        db.collection("temoignage")
+        db.collection("data")
           .findOne(myquery, function (err, data) {
             let reponse;
 
@@ -145,4 +123,4 @@ exports.findCaseById = function(id, callback) {
       }
     });
   }
-}
+};
