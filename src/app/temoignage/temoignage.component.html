@@ -1,25 +1,42 @@
 <div *ngFor="let obj of tabTem">
   <mat-card class="cardContainer">
     <mat-card-header>
-      <i mat-card-avatar class="material-icons">
-        dns
-      </i>
-      <mat-card-title>Témoignage {{obj.id_temoignage}}</mat-card-title>
-      <mat-card-subtitle>{{obj.tem_nom_dossier}}</mat-card-subtitle>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>{{obj.tem_nom_dossier}}</mat-card-title>
+      <mat-card-subtitle>Témoignage no {{obj.id_temoignage}} du cas no {{obj.id_cas_tem}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <mat-divider></mat-divider>
-
-      <div class="temoignage">
-        <table>
-          <tr>
-            <td>
-              <div class="titleInCard">Cas n* </div>{{obj.id_cas}}
-            </td>
-          </tr>
-        </table>
-      </div>
-
+      <p>Numéro d'études du cas: {{obj.cas_numEtude}}</p>
+      <p>Id du témoignage: {{obj.id_temoignage}}</p>
+      <p>Nom du témoignage: {{obj.tem_nom_dossier}}</p>
+      <p>Résumé du témoignage: {{obj.tem_resume}}</p>
+      <p>Type de témoignage: {{obj.tem_Ti_type}}</p>
+      <p>Âge du témoin: {{obj.tem_age}}</p>
+      <p>Genre du témoin: {{obj.tem_genre}}</p>
+      <p>Commune du témoin: {{obj.tem_adr_commune}}</p>
+      <p>Code postal du témoin: {{obj.tem_adr_CP}}</p>
+      <p>Département du témoin: {{obj.tem_adr_dpt}}</p>
+      <p>Pays du témoin: {{obj.tem_adr_pays}}</p>
+      <p>Niveau de formation du témoin: {{obj.tem_xp_formation_niveau_type}}</p>
+      <p>Type de profession du témoin: {{obj.tem_xp_activite_type}}</p>
+      <p>Expérience en aéronautique: {{obj.tem_xp_aero}}</p>
+      <p>Niveau d'expérience en aéronautique: {{obj.tem_xp_aero_niveau}}</p>
+      <p>Expérience en astronomie: {{obj.tem_xp_astro}}</p>
+      <p>Niveau d'expérience en astronomie: {{obj.tem_xp_astro_niveau}}</p>
+      <p>Expérience en topographie: {{obj.tem_xp_topo}}</p>
+      <p>Niveau d'expérience en topographie: {{obj.tem_xp_topo_niveau}}</p>
+      <p>Expérience en ufologie: {{obj.tem_xp_UFO}}</p>
+      <p>Niveau d'expérience en ufologie: {{obj.tem_xp_UFO_niveau}}</p>
+      <p>Moyen d'observation: {{obj.tem_obs_moyen}}</p>
+      <p>Émotions ressenties par le témoin: {{obj.tem_emotions_lib}}</p>
+      <p>Activités du témoin après observation: {{obj.tem_activite_lib}}</p>
+      <p>Interprétation de ce qui a été observé: {{obj.tem_avis_interpretation_lib}}</p>
+      <p>Intérêt du témoin sur ces phénomènes: {{obj.tem_avis_interet_lib}}</p>
+      <p>Changement sur l'intéret du témoin sur ces phénomènes: {{obj.tem_avis_change_lib}}</p>
+      <p>Avis du témoin sur la science et ces phénomènes: {{obj.tem_avis_science_lib}}</p>
+      <p>Changement sur la vie du témoin suite à cette expérience: {{obj.tem_experience_change_lib}}</p>
     </mat-card-content>
   </mat-card>
+  <mat-divider></mat-divider>
 </div>
+<button mat-button [routerLink]="['']">Retour</button>

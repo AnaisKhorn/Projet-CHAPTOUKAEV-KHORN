@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Temoignage} from './Temoignage';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -8,23 +10,27 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./temoignage.component.css']
 })
 export class TemoignageComponent implements OnInit {
+
+  static GET_TESTI = 'http://localhost:8080/api/temoignage/';
+
   tabObj: Array<any>;
   tabTem: Temoignage[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     this.tabObj = [];
     this.tabTem = [];
 
-    this.http.get('http://localhost:8080/api/temoignages').subscribe((data: any) => {
+    this.http.get(TemoignageComponent.GET_TESTI + this.route.snapshot.params.id).subscribe((data: any) => {
       // tslint:disable-next-line:one-line
-      for (let i = 0; i < data.length; i++){
-        this.tabObj.push(data[i]);
+     /* for (let i = 0; i < data.data.length; i++){
+        this.tabObj.push(data.data[i]);
       }
       console.log(this.tabObj);
-      this.populateTabTem();
+      this.populateTabTem();*/
+     this.tabTem = data;
     });
   }
 

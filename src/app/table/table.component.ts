@@ -11,26 +11,32 @@ import {Cas} from '../cas/Cas';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+export class TableComponent implements OnInit, AfterViewInit {
   cas: CasLight[] = [];
   page = 1;
   pagesize = 10;
 
   // tslint:disable-next-line:max-line-length
   displayedColumns = ['id', 'nom', 'type de cas', 'résumé du cas', 'région', 'année du cas', 'nb de témoignages', 'date de la dernière maj'];
-
   searchText = '';
+  datasource = new MatTableDataSource<CasLight>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
 
   ngOnInit() {
     this.getCases();
   }
 
+  ngAfterViewInit() {
+    this.datasource.paginator = this.paginator;
+  }
+
   public getCases = () => {
-    this.http.get('http://localhost:8080/api/data').subscribe((res: any) => this.cas = res.data);
+    this.http.get('http://localhost:8080/api/cas').subscribe((res: any) => this.datasource.data = res.data);
   }
 
   public getCasesByDate() {
@@ -46,10 +52,10 @@ export class TableComponent implements OnInit {
   }
 
   public toCase(id: string) {
-    this.router.navigate(['/cas/' + id]);
+    this.router.navigate(['/cas/' + id.replace(/\s/g, '')]);
   }
 
   public toTesti(id: string) {
-    this.router.navigate(['/temoignages/' + id]);
+    this.router.navigate(['/temoignage/' + id.replace(/\s/g, '')]);
   }
 }

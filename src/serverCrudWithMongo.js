@@ -77,15 +77,36 @@ app.get('/api/connection', function(req, res) {
 // page = no de la page
 // Oui, on va faire de la pagination, pour afficher
 // par exemple les cas 10 par 10
-app.get('/api/data', function(req, res) {
+app.get('/api/cas', function(req, res) {
   // Si présent on prend la valeur du param, sinon 1
   let page = parseInt(req.query.page || 1);
   // idem si present on prend la valeur, sinon 10
   let pagesize = parseInt(req.query.pagesize || 10);
 
-  mongoDBModule.getData(page, pagesize, function(data) {
+  mongoDBModule.getCases(page, pagesize, function(data) {
     var objdData = {
-      msg:"Données recherchés avec succès",
+      msg:"Cas recherchés avec succès",
+      data: data
+    }
+    res.send(JSON.stringify(objdData));
+  });
+});
+
+// On va récupérer des cas par un GET (standard REST)
+// cette fonction d'API peut accepter des paramètres
+// pagesize = nombre de cas par page
+// page = no de la page
+// Oui, on va faire de la pagination, pour afficher
+// par exemple les cas 10 par 10
+app.get('/api/temoignage', function(req, res) {
+  // Si présent on prend la valeur du param, sinon 1
+  let page = parseInt(req.query.page || 1);
+  // idem si present on prend la valeur, sinon 10
+  let pagesize = parseInt(req.query.pagesize || 10);
+
+  mongoDBModule.getTestimonies(page, pagesize, function(data) {
+    var objdData = {
+      msg:"Temoignages recherchés avec succès",
       data: data
     }
     res.send(JSON.stringify(objdData));
@@ -93,7 +114,7 @@ app.get('/api/data', function(req, res) {
 });
 
 // Récupération d'un seul cas par son id
-  app.get('/api/data/cas/:id', function(req, res) {
+  app.get('/api/cas/:id', function(req, res) {
     var id = req.params.id;
 
     mongoDBModule.findCaseById(id, function(data) {
@@ -102,7 +123,7 @@ app.get('/api/data', function(req, res) {
 });
 
 // Récupération d'un seul temoignage par son id
-app.get('/api/data/tem/:id', function(req, res) {
+app.get('/api/temoignage/:id', function(req, res) {
   var id = req.params.id;
 
   mongoDBModule.findTemById(id, function(data) {

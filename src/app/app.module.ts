@@ -17,11 +17,14 @@ import {MatDividerModule} from '@angular/material/divider';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonModule} from '@angular/material/button';
 
 const appRoutes: Routes = [
   {path: 'cas', component: CasComponent},
   {path: 'cas/:id', component: CasComponent},
-  {path: 'temoignages', component: TemoignageComponent},
+  {path: 'temoignage', component: TemoignageComponent},
+  {path: 'temoignage/:id', component: TemoignageComponent},
   {path: '', component: TableComponent}
 ];
 
@@ -45,7 +48,9 @@ const appRoutes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatDividerModule
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

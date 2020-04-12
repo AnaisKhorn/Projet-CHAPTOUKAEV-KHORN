@@ -1,4 +1,4 @@
-class Temoignage {
+export class Temoignage {
   _id: string;
   id_cas_tem: string;
   cas_numEtude: string;
@@ -68,5 +68,5 @@ class Temoignage {
     this.tem_avis_change_lib = tem_avis_change_lib;
     this.tem_avis_science_lib = tem_avis_science_lib;
     this.tem_experience_change_lib = tem_experience_change_lib;
-}
+  }
 }
