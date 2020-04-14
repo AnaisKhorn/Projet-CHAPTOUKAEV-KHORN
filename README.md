@@ -88,4 +88,10 @@ Le graphique est intéractif avec le filtre sur le département, vous pouvez don
 
 [![Image](https://i.goopics.net/yxedb.png)](https://goopics.net/i/yxedb)
 
+## Conclusion
+Quant à la question si nous avons été visité ou pas, nous n'avons pas de réelle réponse.
+En effet, la base de données du GEIPAN est très difficile à analyser avec son grand nombre de champs.
+Les données les plus vieilles pouvant dater des années 50, les technologies utilisaient ne sont pas forcément les même utilisées qu'actuellement. 
+Sur le site,  nous pouvons voir que certains cas qui avaient été classé en D, ont été reconsidéré en cas A, B ou bien C plusieurs années plus tard.
+Finalement, beaucoup de champs sont incomplets et nous ne pouvons donc pas répondre à la question.
 
