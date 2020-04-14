@@ -3,8 +3,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {HttpClient} from '@angular/common/http';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
-import {Cas} from '../cas/Cas';
-
 
 @Component({
   selector: 'app-table',
@@ -18,7 +16,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   // tslint:disable-next-line:max-line-length
   displayedColumns = ['id', 'nom', 'type de cas', 'résumé du cas', 'région', 'année du cas', 'nb de témoignages', 'date de la dernière maj'];
-  searchText = '';
   datasource = new MatTableDataSource<CasLight>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

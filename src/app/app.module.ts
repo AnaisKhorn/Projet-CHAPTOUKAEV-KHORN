@@ -17,8 +17,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonModule} from '@angular/material/button';
+
 
 const appRoutes: Routes = [
   {path: 'cas', component: CasComponent},
@@ -36,22 +36,21 @@ const appRoutes: Routes = [
     TableComponent,
     NavbarComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    RouterModule.forRoot(appRoutes),
-    MDBBootstrapModule.forRoot(),
-    MatCardModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule,
-    MatDividerModule,
-    MatProgressSpinnerModule,
-    MatButtonModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        RouterModule.forRoot(appRoutes),
+        MDBBootstrapModule.forRoot(),
+        MatCardModule,
+        MatTableModule,
+        MatPaginatorModule,
+        HttpClientModule,
+        MatDividerModule,
+        MatButtonModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -92,12 +92,6 @@ app.get('/api/cas', function(req, res) {
   });
 });
 
-// On va récupérer des cas par un GET (standard REST)
-// cette fonction d'API peut accepter des paramètres
-// pagesize = nombre de cas par page
-// page = no de la page
-// Oui, on va faire de la pagination, pour afficher
-// par exemple les cas 10 par 10
 app.get('/api/temoignage', function(req, res) {
   // Si présent on prend la valeur du param, sinon 1
   let page = parseInt(req.query.page || 1);
@@ -122,7 +116,7 @@ app.get('/api/temoignage', function(req, res) {
     });
 });
 
-// Récupération d'un seul temoignage par son id
+// Récupération des temoignages associes a l'id du cas
 app.get('/api/temoignage/:id', function(req, res) {
   var id = req.params.id;
 
