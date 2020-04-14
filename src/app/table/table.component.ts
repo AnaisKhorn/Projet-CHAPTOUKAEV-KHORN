@@ -66,7 +66,7 @@ export class TableComponent implements OnInit, AfterViewInit {
   }
 
   generateYears() {
-    for (let i = 1937; i <= 2020; i++) {
+    for (let i = 1947; i <= 2020; i++) {
       this.years.push(i);
     }
   }

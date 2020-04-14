@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { StatsComponent } from './stats/stats.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   {path: 'cas/:id', component: CasComponent},
   {path: 'temoignage', component: TemoignageComponent},
   {path: 'temoignage/:id', component: TemoignageComponent},
+  {path: 'stats', component: StatsComponent},
   {path: '', component: TableComponent}
 ];
 
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     CasComponent,
     TemoignageComponent,
     TableComponent,
-    NavbarComponent
+    NavbarComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
