@@ -43,9 +43,6 @@ app.get('/', function(req, res) {
 
 // Ici des routes en :
 // http GET (pour récupérer des données)
-// http POST : pour insérer des données
-// http PUT pour modifier des données
-// http DELETE pour supprimer des données
 
 //----------------------------------------------
 // Ces routes forment l'API de l'application !!
@@ -86,7 +83,7 @@ app.get('/api/cas', function(req, res) {
   // idem si present on prend la valeur, sinon 10
   let pagesize = parseInt(req.query.pagesize || 10);
 
-  mongoDBModule.findCases(page, pagesize, function(data) {
+  mongoDBModule.getCases(page, pagesize, function(data) {
     var objdData = {
       msg:"Cas recherchés avec succès",
       data: data
@@ -95,42 +92,59 @@ app.get('/api/cas', function(req, res) {
   });
 });
 
-// Récupération d'un seul cas par son id
-app.get('/api/cas/:id', function(req, res) {
-  var id = req.params.id;
-
-  mongoDBModule.findCaseById(id, function(data) {
-    res.send(JSON.stringify(data));
-  });
-});
-
-// On va récupérer des témoignages par un GET (standard REST)
-// cette fonction d'API peut accepter des paramètres
-// pagesize = nombre de témoignages par page
-// page = no de la page
-// Oui, on va faire de la pagination, pour afficher
-// par exemple les témoignages 10 par 10
-app.get('/api/temoignages', function(req, res) {
+app.get('/api/temoignage', function(req, res) {
   // Si présent on prend la valeur du param, sinon 1
   let page = parseInt(req.query.page || 1);
   // idem si present on prend la valeur, sinon 10
   let pagesize = parseInt(req.query.pagesize || 10);
 
-  mongoDBModule.findTestimonies(page, pagesize, function(data) {
+  mongoDBModule.getTestimonies(page, pagesize, function(data) {
     var objdData = {
-      msg:"Témoignage recherchés avec succès",
+      msg:"Temoignages recherchés avec succès",
       data: data
     }
     res.send(JSON.stringify(objdData));
   });
 });
 
-// Récupération d'un seul témoignage par son id
-app.get('/api/temoignages/:id', function(req, res) {
+// Récupération d'un seul cas par son id
+  app.get('/api/cas/:id', function(req, res) {
+    var id = req.params.id;
+
+    mongoDBModule.findCaseById(id, function(data) {
+      res.send(JSON.stringify(data));
+    });
+});
+
+// Récupération des temoignages associes a l'id du cas
+app.get('/api/temoignage/:id', function(req, res) {
   var id = req.params.id;
 
-  mongoDBModule.findTestimonyById(id, function(data) {
+  mongoDBModule.findTemById(id, function(data) {
     res.send(JSON.stringify(data));
   });
+});
 
+app.get('/api/cas/searchByName/:nom', function(req, res) {
+  var nom_dossier = req.params.nom;
+
+  mongoDBModule.searchName(nom_dossier, function(data) {
+    res.send(JSON.stringify(data));
+  })
+});
+
+app.get('/api/cas/search/:date', function(req, res) {
+  var date_cas = req.params.date_cas;
+
+  mongoDBModule.search(date_cas, function(data) {
+    res.send(JSON.stringify(data));
+  })
+});
+
+app.get('/api/cas/search/:type', function(req, res) {
+  var type_cas = req.params.type_cas;
+
+  mongoDBModule.search(type_cas, function(data) {
+    res.send(JSON.stringify(data));
+  })
 });

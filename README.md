@@ -1,31 +1,91 @@
-# ProjetCHAPTOUKAEVKHORN
+# Projet CHAPTOUKAEV-KHORN - Cas et témoignages d'objets célestes non identifiés
+Projet réalisé en Angular dans le cadre de la 2ème année de Master MBDS.
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
+En cas de problème, vous pouvez nous contacter sur  :
+ - Hava CHAPTOUKAEV : avachap87@yahoo.fr
+ - Anaïs KHORN : anais.khorn@gmail.com
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Prérequis
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+ - MongoDB
+ - NodeJS
+ - Angular
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+### Installation des données
 
-## Running unit tests
+Nous avons décidé d'utiliser MongoDB Compass pour installer les fichiers .csv dans la base de données.
+Vous allez pouvoir trouver ces fichiers dans /src/files. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Voici les étapes à suivre :
 
-## Running end-to-end tests
+ 1. Créer une database dans le logiciel, nous avons nommé celle-ci : **db**.
+ 2. Créer une première collection : **cas** avec le fichier *cas_pub2.csv*.
+ 3. Créer une deuxième collection : **temoignages** avec le fichier *temoignages_pub2.csv*.
+ 
+ Vous devriez obtenir ceci :
+[![Image](https://i.goopics.net/0Glg3.png)](https://goopics.net/i/0Glg3)
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+## Utilisation
 
-## Deploying to GitHub Pages
+Pour mener à bien votre expérience, veuillez suivre ces étapes :
 
-Run `ng github-pages:deploy` to deploy to GitHub Pages.
+ 1.  Dans une première console, vous devez aller dans la racine du projet et lancer pour résoudre les éventuels problèmes de dépendances :
 
-## Further help
+      npm install
+    
+    
 
-To get more help on the `angular-cli` use `ng help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+ 2. Dans une deuxième console, veuillez lancer cette commande :
+ 
+
+    mongod
+
+ 3. Dans une troisième console, veuillez vous rendre dans le dossier src du projet et lancer le serveur via cette commande :
+ 
+
+    node ./serverCrudWithMongo.js
+
+ 4. Dans une autre console, veuillez aller dans le dossier du fichier et lancer cette commande :
+
+    ng serve
+
+Si tout s'est déroulé sans accro, vous allez pouvoir vous rendre sur ce lien :
+
+    http://localhost:4200/
+
+
+Vous devriez voir ceci :
+[![Image](https://i.goopics.net/XbemV.png)](https://goopics.net/i/XbemV)
+
+### Recherche
+Sur cette page, vous allez pouvoir faire la recherche par 3 moyens :
+
+ - Par mot-clé
+ - Par type
+ - Par date (année)
+
+### Accès à un cas
+Pour accéder à un cas, veuillez cliquer sur son id.
+
+[![Image](https://i.goopics.net/GwlOv.png)](https://goopics.net/i/GwlOv)
+
+### Accès aux témoignages associés au cas spécifié
+Pour accéder aux témoignages, veuiller cliquer sur la case de la colonne **Nb de témoignages**.
+NB : Même si aucun chiffre n'est affiché un témoignage peut néanmoins exister, donc n'hésitez pas à cliquer ;)
+
+[![Image](https://i.goopics.net/9ol3l.png)](https://goopics.net/i/9ol3l)
+
+    
+## Statistiques
+Veuillez cliquer sur l'onglet **Statistiques** de la navbar pour accèder aux statistiques.
+
+### 1er graphique : Nombre de cas par type
+Vous pouvez trouver ici un graphique déterminant le nombre de cas par son type. 
+Le graphique est intéractif avec le filtre sur le département, vous pouvez donc obtenir le nombre pour chaque type de cas pour le département sélectionné.
+
+[![Image](https://i.goopics.net/yxedb.png)](https://goopics.net/i/yxedb)
+
+

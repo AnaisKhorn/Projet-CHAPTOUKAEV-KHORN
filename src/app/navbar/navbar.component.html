@@ -1,27 +1,20 @@
-<!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark purple">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark green">
 
-  <a class="navbar-brand">  </a>
+ <mdb-navbar-brand>
+   <img class="logo" src="../../assets/ufo-icon-vector.png">
+ </mdb-navbar-brand>
 
-  <!-- Collapsible content -->
   <links>
-
-    <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link waves-light"  mdbWavesEffect [routerLink]="['']">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/temoignages']">Témoignages</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/cas']">Statistiques</a>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/stats']">Statistiques</a>
       </li>
 
     </ul>
-    <!-- Links -->
   </links>
-  <!-- Collapsible content -->
 
 </mdb-navbar>
-<!--/.Navbar-->
+

@@ -1,0 +1,30 @@
+<h2>Statistiques</h2>
+
+<mat-form-field class="byType">
+  <mat-label>Département</mat-label>
+  <mat-select [(value)]="selectedRegion" (selectionChange)="getCas()">
+    <mat-option value="">Tous</mat-option>
+    <mat-option *ngFor="let item of tabRegion" [value]="item">
+      {{item}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<h3>Nombre de cas par type</h3>
+<h4>NB : Passez votre souris sur les barres pour obtenir plus d'infos</h4>
+
+<!-- horizontal bar chart -->
+<div class="horizontalBar" style="display: block">
+  <canvas mdbChart
+          [chartType]="chartType"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [options]="chartOptions"
+          [legend]="true"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)">
+  </canvas>
+</div>
+
+

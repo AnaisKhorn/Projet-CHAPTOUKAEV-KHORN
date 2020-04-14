@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
 import { AppComponent } from './app.component';
 import { CasComponent } from './cas/cas.component';
 import { TemoignageComponent } from './temoignage/temoignage.component';
@@ -17,11 +16,18 @@ import {MatDividerModule} from '@angular/material/divider';
 import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { StatsComponent } from './stats/stats.component';
 
 const appRoutes: Routes = [
   {path: 'cas', component: CasComponent},
   {path: 'cas/:id', component: CasComponent},
-  {path: 'temoignages', component: TemoignageComponent},
+  {path: 'temoignage', component: TemoignageComponent},
+  {path: 'temoignage/:id', component: TemoignageComponent},
+  {path: 'stats', component: StatsComponent},
   {path: '', component: TableComponent}
 ];
 
@@ -31,7 +37,8 @@ const appRoutes: Routes = [
     CasComponent,
     TemoignageComponent,
     TableComponent,
-    NavbarComponent
+    NavbarComponent,
+    StatsComponent
   ],
   imports: [
     BrowserModule,
@@ -39,13 +46,17 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatInputModule,
     RouterModule.forRoot(appRoutes),
     MDBBootstrapModule.forRoot(),
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
     HttpClientModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

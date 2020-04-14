@@ -19,7 +19,7 @@ exports.connexionMongo = function(callback) {
   });
 }
 
-exports.findCases = function(page, pagesize, callback) {
+exports.getCases = function(page, pagesize, callback) {
   MongoClient.connect(url, function(err, client) {
     console.log("pagesize = " + pagesize);
     console.log("page = " + pagesize);
@@ -31,7 +31,27 @@ exports.findCases = function(page, pagesize, callback) {
       db.collection('cas')
         .find()
         .skip(page*pagesize)
-        .limit(pagesize)
+        .toArray()
+        .then(arr => callback(arr));
+    }
+    else{
+      callback(-1);
+    }
+  });
+};
+
+exports.getTestimonies = function(page, pagesize, callback) {
+  MongoClient.connect(url, function(err, client) {
+    console.log("pagesize = " + pagesize);
+    console.log("page = " + pagesize);
+
+    var db = client.db(dbName);
+
+    console.log("db " + db)
+    if(!err){
+      db.collection('temoignages')
+        .find()
+        .skip(page*pagesize)
         .toArray()
         .then(arr => callback(arr));
     }
@@ -56,14 +76,14 @@ exports.findCaseById = function(id, callback) {
           if (!err) {
             reponse = {
               succes: true,
-              restaurant: data,
+              cas: data,
               error: null,
               msg: "Details du cas envoyé"
             };
           } else {
             reponse = {
               succes: false,
-              restaurant: null,
+              cas: null,
               error: err,
               msg: "erreur lors du find"
 
@@ -74,75 +94,89 @@ exports.findCaseById = function(id, callback) {
     } else {
       let reponse = reponse = {
         succes: false,
-        restaurant: null,
+        cas: null,
         error: err,
         msg: "erreur de connexion à la base"
       };
       callback(reponse);
     }
   });
+};
 
-
-  exports.findTestimonies = function (page, pagesize, callback) {
-    MongoClient.connect(url, function (err, client) {
-      console.log("pagesize = " + pagesize);
-      console.log("page = " + pagesize);
-
-      var db = client.db(dbName);
-
-      console.log("db " + db)
-      if (!err) {
-        db.collection('temoignage')
-          .find()
-          .skip(page * pagesize)
-          .limit(pagesize)
-          .toArray()
-          .then(arr => callback(arr));
-      } else {
-        callback(-1);
-      }
-    });
-  };
-
-  exports.findTestimonyById = function (id, callback) {
+  exports.findTemById = function (id, callback) {
     MongoClient.connect(url, function (err, client) {
       var db = client.db(dbName);
       if (!err) {
         // La requete mongoDB
 
-        let myquery = {"_id": ObjectId(id)};
+        let myquery = {id_cas_tem: id};
 
-        db.collection("temoignage")
-          .findOne(myquery, function (err, data) {
-            let reponse;
-
-            if (!err) {
-              reponse = {
-                succes: true,
-                temoignage: data,
-                error: null,
-                msg: "Details du témoignage envoyé"
-              };
-            } else {
-              reponse = {
-                succes: false,
-                temoignage: null,
-                error: err,
-                msg: "erreur lors du find"
-
-              };
-            }
-            callback(reponse);
+        db.collection("temoignages")
+          .find(myquery)
+          .toArray(function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            callback(result);
           });
-      } else {
-        let reponse = reponse = {
-          succes: false,
-          temoignage: null,
-          error: err,
-          msg: "erreur de connexion à la base"
-        };
-        callback(reponse);
       }
     });
-  }
-}
+  };
+
+    exports.searchName = function (nom_dossier, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_nom_dossier: '%' + nom_dossier.toLowerCase() + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
+    exports.searchDate = function (date_cas, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_AAAA: '%' + date_cas + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
+    exports.searchType = function (type_cas, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_classification: '%' + type_cas + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
+
