@@ -22,7 +22,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { StatsComponent } from './stats/stats.component';
 
-
 const appRoutes: Routes = [
   {path: 'cas', component: CasComponent},
   {path: 'cas/:id', component: CasComponent},
