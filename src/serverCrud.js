@@ -113,3 +113,46 @@ app.get('/api/temoignage/:id', function(req, res) {
   res.send(JSON.stringify(reponse));
 });
 
+app.get('/api/cas/searchByName/:name', function(req, res) {
+  var nom_dossier = req.params.name;
+
+  // On simule une réponse
+  let message = "<h1>/api/cas: on recherche des cas";
+  message += " avec ces params:</h1>";
+  message += "<ul><li>Nom = " + nom_dossier + "</li><li>";
+
+
+  let reponse = {
+    msg : message
+  }
+  res.send(JSON.stringify(reponse));
+});
+
+app.get('/api/cas/search/:date', function(req, res) {
+  var date_cas = req.params.date;
+
+  // On simule une réponse
+  let message = "<h1>/api/cas: on recherche des cas";
+  message += " avec ces params:</h1>";
+  message += "<ul><li>Date = " + date_cas + "</li><li>";
+
+
+  let reponse = {
+    msg : message
+  }
+  res.send(JSON.stringify(reponse));
+});
+
+app.get('/api/cas/search/:type', function(req, res) {
+  var type_cas = req.params.type;
+
+  // On simule une réponse
+  let message = "<h1>/api/cas: on recherche des cas";
+  message += " avec ces params:</h1>";
+  message += "<ul><li>Type = " + type_cas + "</li><li>";
+
+  let reponse = {
+    msg : message
+  }
+  res.send(JSON.stringify(reponse));
+});

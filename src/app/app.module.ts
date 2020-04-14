@@ -18,6 +18,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 
 const appRoutes: Routes = [
@@ -36,21 +39,24 @@ const appRoutes: Routes = [
     TableComponent,
     NavbarComponent
   ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        RouterModule.forRoot(appRoutes),
-        MDBBootstrapModule.forRoot(),
-        MatCardModule,
-        MatTableModule,
-        MatPaginatorModule,
-        HttpClientModule,
-        MatDividerModule,
-        MatButtonModule,
-    ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatInputModule,
+    RouterModule.forRoot(appRoutes),
+    MDBBootstrapModule.forRoot(),
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

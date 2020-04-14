@@ -124,3 +124,27 @@ app.get('/api/temoignage/:id', function(req, res) {
     res.send(JSON.stringify(data));
   });
 });
+
+app.get('/api/cas/searchByName/:nom', function(req, res) {
+  var nom_dossier = req.params.nom;
+
+  mongoDBModule.searchName(nom_dossier, function(data) {
+    res.send(JSON.stringify(data));
+  })
+});
+
+app.get('/api/cas/search/:date', function(req, res) {
+  var date_cas = req.params.date_cas;
+
+  mongoDBModule.search(date_cas, function(data) {
+    res.send(JSON.stringify(data));
+  })
+});
+
+app.get('/api/cas/search/:type', function(req, res) {
+  var type_cas = req.params.type_cas;
+
+  mongoDBModule.search(type_cas, function(data) {
+    res.send(JSON.stringify(data));
+  })
+});

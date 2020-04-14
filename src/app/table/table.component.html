@@ -1,3 +1,28 @@
+<mat-form-field class="keyword">
+  <mat-label>Recherche par mot-clé</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+</mat-form-field>
+
+<mat-form-field class="byType">
+  <mat-label>Type de cas</mat-label>
+  <mat-select [(value)]="selectedType" (selectionChange)="getCases()">
+    <mat-option value="">Tous</mat-option>
+    <mat-option *ngFor="let item of typeCas" [value]="item">
+      {{item}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="byYear">
+  <mat-label>Année du cas</mat-label>
+  <mat-select [(value)]="selectedYears" (selectionChange)="getCases()">
+    <mat-option value="">Tous</mat-option>
+    <mat-option *ngFor="let item of years" [value]="item">
+      {{item}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="id">

@@ -101,6 +101,7 @@ exports.findCaseById = function(id, callback) {
       callback(reponse);
     }
   });
+};
 
   exports.findTemById = function (id, callback) {
     MongoClient.connect(url, function (err, client) {
@@ -119,7 +120,63 @@ exports.findCaseById = function(id, callback) {
           });
       }
     });
+  };
 
-  }
-}
+    exports.searchName = function (nom_dossier, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_nom_dossier: '%' + nom_dossier.toLowerCase() + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
+    exports.searchDate = function (date_cas, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_AAAA: '%' + date_cas + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
+    exports.searchType = function (type_cas, callback) {
+      MongoClient.connect(url, function (err, client) {
+        var db = client.db(dbName);
+        if (!err) {
+          // La requete mongoDB
+
+          let myquery = {cas_classification: '%' + type_cas + '%'}
+
+          db.collection("cas")
+            .find(myquery)
+            .toArray(function (err, result) {
+              if (err) throw err;
+              console.log(result);
+              callback(result);
+            });
+        }
+      });
+    };
+
 
